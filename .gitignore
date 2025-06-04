@@ -200,3 +200,11 @@ tmp/
 temp/
 *.tmp
 *.temp
+
+# Research papers and documentation
+*.pdf
+Research Article/
+
+# Performance reports and logs
+aidas_performance_report_*.json
+*.json
