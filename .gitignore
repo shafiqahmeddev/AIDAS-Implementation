@@ -202,8 +202,13 @@ temp/
 *.temp
 
 # Research papers and documentation
-*.pdf
-Research Article/
+# Allow specific research articles
+!Research Article/
+!Research Article/*.pdf
+# But exclude other PDFs in root and other directories
+/*.pdf
+docs/*.pdf
+temp/*.pdf
 
 # Performance reports and logs
 aidas_performance_report_*.json
