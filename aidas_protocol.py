@@ -125,7 +125,7 @@ class DQNIntrusionDetector:
             tf.keras.layers.Dense(32, activation='relu'),
             tf.keras.layers.Dense(self.action_dim, activation='linear')
         ])
-        model.compile(optimizer=tf.keras.optimizers.Adam(lr=self.learning_rate), loss='mse')
+        model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=self.learning_rate), loss='mse')
         return model
     
     def update_target_model(self):
