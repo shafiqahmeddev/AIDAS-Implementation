@@ -1,174 +1,85 @@
-# AIDAS Configuration File Example
-# Copy this file to config.yaml and adjust the values as needed
+# AIDAS Protocol Configuration Example
+# Copy this file to config.yaml and modify as needed
 
-# Application Settings
-app:
-  name: "AIDAS Protocol Implementation"
-  version: "1.0.0"
-  debug: false
-  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
-
-# Protocol Configuration
-protocol:
-  # Authentication settings
-  authentication:
-    timeout_seconds: 30
-    max_attempts: 3
-    session_duration_hours: 24
-  
-  # Cryptographic parameters
-  crypto:
-    key_length: 32  # bytes
-    aes_mode: "CBC"
-    hash_algorithm: "SHA256"
-  
-  # PUF settings
-  puf:
-    noise_level: 0.03
-    verification_threshold: 0.9
-    challenge_length: 16  # bytes
-  
-  # Chaotic map parameters
-  chaotic_map:
-    r_parameter: 3.99
-    initial_condition: null  # null for random
+# Security Configuration
+security:
+  encryption_key_length: 32
+  hash_algorithm: "sha256"
+  aes_mode: "CBC"
+  puf_noise_level: 0.03
+  puf_verification_threshold: 0.9
+  session_timeout_seconds: 3600
+  max_authentication_attempts: 3
+  enable_fuzzy_matching: true
 
 # AI/ML Configuration
 ai:
-  # DQN settings
-  dqn:
-    learning_rate: 0.001
-    gamma: 0.97
-    epsilon_start: 1.0
-    epsilon_min: 0.01
-    epsilon_decay: 0.995
-    memory_size: 10000
-    batch_size: 32
-  
-  # Detection thresholds
-  detection:
-    accuracy_target: 0.978
-    false_positive_rate_max: 0.012
-    update_frequency_ms: 250
+  dqn_state_dim: 10
+  dqn_action_dim: 4
+  dqn_memory_size: 10000
+  learning_rate: 0.001
+  epsilon_start: 1.0
+  epsilon_min: 0.01
+  epsilon_decay: 0.995
+  gamma: 0.97
+  batch_size: 32
+  target_update_frequency: 100
+  training_episodes: 1000
+
+# Chaotic Map Configuration
+chaotic_map:
+  control_parameter: 3.99
+  initial_condition_range: [0.1, 0.9]
+  key_generation_iterations: 1000
+  randomness_threshold: 0.45
 
 # Network Configuration
 network:
-  # Communication settings
-  communication:
-    default_port: 8443
-    use_tls: true
-    certificate_path: null
-    key_path: null
-  
-  # Performance limits
-  limits:
-    max_connections: 1000
-    connection_timeout_ms: 5000
-    request_timeout_ms: 30000
+  esp_host: "localhost"
+  esp_port: 8080
+  api_version: "v1"
+  timeout_seconds: 30
+  max_retries: 3
+  enable_tls: true
+  cert_path: null
+  key_path: null
 
-# Entity Defaults
-entities:
-  # Operator settings
-  operator:
-    biometric_data_length: 32
-    smart_card_validity_days: 365
-  
-  # Vehicle settings
-  vehicle:
-    registration_token_length: 32
-    puf_challenge_rotation_hours: 1
-  
-  # Charging station settings
-  charging_station:
-    max_concurrent_sessions: 10
-    session_timeout_minutes: 60
-
-# GUI Configuration (for future implementation)
-gui:
-  theme: "dark"  # dark, light, auto
-  window_size:
-    width: 1200
-    height: 800
-  refresh_rate_ms: 1000
-  
-# Database Configuration (for future implementation)
+# Database Configuration
 database:
-  type: "sqlite"  # sqlite, postgresql, mysql
-  connection:
-    host: "localhost"
-    port: 5432
-    name: "aidas_db"
-    user: "aidas_user"
-    password: ""  # Use environment variable AIDAS_DB_PASSWORD
-  
-  # Connection pool
-  pool:
-    size: 10
-    max_overflow: 20
-    timeout: 30
+  db_type: "sqlite"
+  db_host: "localhost"
+  db_port: 5432
+  db_name: "aidas"
+  db_user: "aidas_user"
+  db_password: ""
+  db_path: "aidas.db"
+  enable_migrations: true
+  connection_pool_size: 10
 
-# Monitoring and Metrics
-monitoring:
-  # Performance tracking
-  metrics:
-    enabled: true
-    export_interval_seconds: 60
-    export_format: "json"  # json, csv, prometheus
-  
-  # Visualization
-  visualization:
-    plot_history_points: 100
-    update_interval_ms: 500
-    show_real_time: true
+# Logging Configuration
+logging:
+  log_level: "INFO"
+  log_dir: "logs"
+  enable_file_logging: true
+  enable_console_logging: true
+  enable_structured_logging: true
+  max_log_file_size: "10MB"
+  log_retention_days: 30
 
-# Security Settings
-security:
-  # Attack detection
-  intrusion_detection:
-    enabled: true
-    alert_threshold: "high"  # low, medium, high, critical
-    auto_block: true
-    block_duration_minutes: 30
-  
-  # Audit logging
-  audit:
-    enabled: true
-    log_file: "logs/audit.log"
-    rotation: "daily"  # daily, weekly, size
-    retention_days: 90
+# Performance Configuration
+performance:
+  enable_caching: true
+  cache_size: 1000
+  cache_ttl_seconds: 300
+  enable_metrics: true
+  metrics_collection_interval: 60
+  enable_profiling: false
 
-# Development Settings
-development:
-  # Testing
-  testing:
-    use_mock_data: false
-    deterministic_random: false
-    seed: 42
-  
-  # Debugging
-  debug:
-    verbose_logging: false
-    save_intermediate_states: false
-    profiling_enabled: false
-
-# API Configuration (for future implementation)
-api:
-  enabled: false
-  base_path: "/api/v1"
-  cors_enabled: true
-  allowed_origins:
-    - "http://localhost:3000"
-    - "https://aidas.example.com"
-  rate_limiting:
-    enabled: true
-    requests_per_minute: 60
-
-# Environment-specific overrides
-# These can be set via environment variables with prefix AIDAS_
-# Example: AIDAS_APP_DEBUG=true
-environment_overrides:
-  - APP_DEBUG
-  - DATABASE_PASSWORD
-  - API_SECRET_KEY
-  - NETWORK_CERTIFICATE_PATH
-  - NETWORK_KEY_PATH
+# GUI Configuration
+gui:
+  theme: "light"
+  window_width: 1200
+  window_height: 800
+  enable_animations: true
+  refresh_rate: 1000
+  chart_update_interval: 5000

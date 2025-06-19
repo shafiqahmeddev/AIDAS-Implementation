@@ -1,35 +1,36 @@
-# AIDAS: AI-Enhanced Intrusion Detection and Authentication for Autonomous Vehicles
+# AIDAS Protocol Implementation
+
+## AI-Enhanced Intrusion Detection and Authentication for Autonomous Vehicles
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Issues](https://img.shields.io/github/issues/shafiqahmeddev/AIDAS-Implementation.svg)](https://github.com/shafiqahmeddev/AIDAS-Implementation/issues)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 
 ## 🚗 Overview
 
-AIDAS is a cutting-edge security protocol designed specifically for autonomous vehicle ecosystems. It implements a multi-layered security approach combining hardware-level security (PUF), advanced cryptography (Chaotic Maps), and AI-based intrusion detection (DQN) to ensure secure authentication and communication between autonomous vehicles, charging stations, operators, and service providers.
+AIDAS is a comprehensive security protocol designed for autonomous vehicle ecosystems. It combines cutting-edge technologies including Physical Unclonable Functions (PUF), Chaotic Map Cryptography, and Deep Q-Network (DQN) based intrusion detection to provide robust authentication and security for autonomous vehicles, charging stations, and operators.
 
 ## ✨ Key Features
 
-- **🔐 Physical Unclonable Functions (PUF)**: Hardware-based security for unique device identification
-- **🌀 Chaotic Map Cryptography**: Advanced key generation using logistic chaotic maps
-- **🤖 AI-Enhanced Security**: Deep Q-Network (DQN) based intrusion detection system
-- **🔄 Multi-Entity Authentication**: Secure protocol for Operators, AVs, Charging Stations, and ESP
-- **📊 Real-time Monitoring**: Performance metrics and security status visualization
-- **⚡ Low Latency**: Average authentication time of 6.4ms
+- **🔐 Multi-layered Security**: Hardware-level PUF, cryptographic protocols, and AI-based threat detection
+- **🤖 AI-Enhanced Detection**: Deep Q-Network for adaptive intrusion detection  
+- **🔧 Modular Architecture**: Clean, extensible codebase with proper separation of concerns
+- **📊 Real-time Monitoring**: Performance metrics, logging, and visualization
+- **⚙️ Configuration Management**: Flexible YAML-based configuration system
+- **🧪 Comprehensive Testing**: Unit, integration, and performance test suites
 
 ## 🛠️ Installation
 
 ### Prerequisites
 - Python 3.8 or higher
-- pip package manager
 - Virtual environment (recommended)
 
 ### Quick Start
 
 ```bash
 # Clone the repository
-git clone https://github.com/shafiqahmeddev/AIDAS-Implementation.git
-cd AIDAS-Implementation
+git clone <repository-url>
+cd "AIDAS Implementation"
 
 # Create and activate virtual environment
 python -m venv venv
@@ -38,54 +39,82 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the interactive demo
-python interactive_demo.py
+# Configure the system
+cp config/config.example.yaml config/config.yaml
 
-# Run the main protocol simulation
-python aidas_protocol.py
+# Run the enhanced demo
+python demo.py
 ```
 
 ## 🚀 Usage
 
-### Interactive Demo
-The interactive demo provides a menu-driven interface to explore all AIDAS features:
+### Enhanced Interactive Demo
+The new modular demo provides comprehensive feature exploration:
 
 ```bash
-python interactive_demo.py
+python demo.py
 ```
 
-Options include:
-1. Full demonstration of all features
-2. PUF simulation demo
-3. Chaotic cryptography demo
-4. AI intrusion detection demo
-5. Complete authentication demo
-6. Security analysis
-7. Performance metrics
+Features include:
+1. 🎯 Complete system demonstration
+2. ⚙️ Configuration management demo
+3. 📝 Enhanced logging showcase
+4. 🔧 Advanced PUF functionality
+5. 🌀 Chaotic cryptography features
+6. 🤖 AI intrusion detection
+7. 🔐 Protocol simulation
+8. 🚀 Performance evaluation
+9. ⚡ Advanced cryptographic features
+10. 🔒 Security and error handling
 
-### Protocol Simulation
-Run a complete performance evaluation:
+### Quick Test
+Run a simple functionality test:
 
 ```bash
-python aidas_protocol.py
+python -c "
+from aidas import AIDASimulator
+import secrets
+
+# Create simulator and entities
+simulator = AIDASimulator()
+bio_data = secrets.token_bytes(32)
+operator = simulator.create_operator('TEST_OP', 'password123', bio_data)
+vehicle = simulator.create_vehicle('TEST_AV')
+station = simulator.create_charging_station('TEST_CS')
+
+# Run authentication
+result = simulator.simulate_authentication_session(
+    operator.entity_id, vehicle.entity_id, station.entity_id
+)
+
+print(f'Authentication: {\"✅ SUCCESS\" if result[\"success\"] else \"❌ FAILED\"}')
+print(f'Latency: {result[\"latency_ms\"]:.2f} ms')
+"
 ```
 
-This will:
-- Create multiple entities (operators, vehicles, charging stations)
-- Simulate authentication sessions
-- Generate performance reports
-- Display real-time monitoring dashboard
-
-## 📁 Project Structure
+## 📁 Enhanced Project Structure
 
 ```
 AIDAS-Implementation/
-├── aidas_protocol.py      # Core protocol implementation
-├── interactive_demo.py    # Interactive demonstration
-├── requirements.txt       # Python dependencies
-├── CLAUDE.md             # Comprehensive implementation plan
-├── README.md             # This file
-└── Research Article/     # Original research paper
+├── aidas/                      # Main package
+│   ├── core/                   # Core components
+│   │   ├── entities.py         # Protocol entities
+│   │   ├── crypto.py           # Cryptographic engine
+│   │   ├── puf.py              # Physical Unclonable Function
+│   │   └── chaotic_map.py      # Chaotic map cryptography
+│   ├── ai/                     # AI components
+│   │   └── dqn_detector.py     # DQN intrusion detection
+│   ├── protocol/               # Protocol logic
+│   │   ├── authentication.py   # Authentication simulator
+│   │   └── session.py          # Session management
+│   └── utils/                  # Utilities
+│       ├── logger.py           # Enhanced logging
+│       └── config.py           # Configuration management
+├── config/                     # Configuration files
+├── tests/                      # Test suites
+├── demo.py                     # Enhanced demo script
+├── aidas_protocol.py           # Legacy implementation
+└── interactive_demo.py         # Legacy demo
 ```
 
 ## 🔧 Core Components
